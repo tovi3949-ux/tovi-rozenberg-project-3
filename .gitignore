@@ -1,0 +1,30 @@
+# Server
+server/bin/
+server/obj/
+server/.vs/
+server/*.user
+server/*.db
+server/*.db-shm
+server/*.db-wal
+
+# Client
+client/node_modules/
+client/build/
+client/dist/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.db3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backups
+backup_*/
