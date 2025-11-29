@@ -1,29 +1,24 @@
-# Multi-stage build for Linux (.NET 7) with explicit Debian-slim and non-root runtime
-
-# Build stage (Linux)
-FROM mcr.microsoft.com/dotnet/sdk:9.0-bookworm-slim AS build
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy csproj and restore (better layer cache)
+# Copy csproj and restore dependencies
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy the rest and publish
+# Copy everything else and build
 COPY . ./
-RUN dotnet publish -c Release --no-restore -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
-# Runtime stage (Linux)
-FROM mcr.microsoft.com/dotnet/aspnet:9.0-bookworm-slim AS runtime
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
-# Create non-root user
-RUN addgroup --system dotnet && adduser --system --ingroup dotnet app
-COPY --from=build /app/publish ./
-RUN chown -R app:dotnet /app
-USER app
+# Copy published app
+COPY --from=build /app/publish .
 
-# Bind and expose port 5006 (matches Program.cs)
-ENV ASPNETCORE_URLS="http://+:5006"
-EXPOSE 5006
+# Expose port (Render will override with PORT env variable)
+EXPOSE 10000
 
+# Run the app
 ENTRYPOINT ["dotnet", "TodoApi.dll"]		
