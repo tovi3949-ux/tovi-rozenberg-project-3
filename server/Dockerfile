@@ -1,7 +1,7 @@
 # Multi-stage build for Linux (.NET 7) with explicit Debian-slim and non-root runtime
 
 # Build stage (Linux)
-FROM mcr.microsoft.com/dotnet/sdk:7.0-bookworm-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0-bookworm-slim AS build
 WORKDIR /src
 
 # Copy csproj and restore (better layer cache)
