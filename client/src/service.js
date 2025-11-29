@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // הגדרת Config Defaults
 // Production URL
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://todolist-srever.onrender.com';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 // Interceptor להוספת JWT לכל בקשה
 axios.interceptors.request.use((config) => {

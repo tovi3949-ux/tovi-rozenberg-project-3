@@ -3,7 +3,7 @@ import service from './service.js';
 import Login from './Login.js';
 import Register from './Register.js';
 import './index.css';
-
+import dotenv from 'dotenv';
 function App() {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
