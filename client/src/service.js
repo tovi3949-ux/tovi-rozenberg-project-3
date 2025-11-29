@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // הגדרת Config Defaults
-axios.defaults.baseURL = `http://localhost:5006`;
+// Production URL
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://todolist-srever.onrender.com';
 
 // Interceptor להוספת JWT לכל בקשה
 axios.interceptors.request.use((config) => {

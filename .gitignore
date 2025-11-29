@@ -6,11 +6,19 @@ server/*.user
 server/*.db
 server/*.db-shm
 server/*.db-wal
+server/out/
 
 # Client
 client/node_modules/
 client/build/
 client/dist/
+
+# Environment files (keep .env.example for reference)
+.env
+.env.local
+.env.*.local
+!.env.production
+!.env.development
 
 # Database
 *.db

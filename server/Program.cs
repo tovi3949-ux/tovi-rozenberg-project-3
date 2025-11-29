@@ -8,8 +8,9 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// לאזין לכל הכתובות (LAN)
-builder.WebHost.UseUrls("http://0.0.0.0:5006");
+// הגדרת URLs - תומך ב-development ו-production
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5006";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
@@ -41,12 +42,17 @@ const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
+                      policy =>
                       {
-                          builder
-                              .AllowAnyOrigin()
+                          // הוספת כתובות מותרות ספציפיות
+                          var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() 
+                              ?? new[] { "http://localhost:3000", "https://localhost:3000" };
+                          
+                          policy
+                              .WithOrigins(allowedOrigins)
                               .AllowAnyHeader()
-                              .AllowAnyMethod();
+                              .AllowAnyMethod()
+                              .AllowCredentials();
                        });
 });
 

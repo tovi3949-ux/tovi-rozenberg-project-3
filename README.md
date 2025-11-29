@@ -3,6 +3,32 @@
 ## 📋 תיאור הפרויקט
 אפליקציית Todo List מלאה עם authentication, בנויה עם ASP.NET Core (Backend) ו-React (Frontend).
 
+**🌐 Live Demo:**
+- **Server API:** https://todolist-srever.onrender.com
+- **Swagger UI:** https://todolist-srever.onrender.com/swagger
+
+---
+
+## 🚀 Quick Start
+
+### Development (Local)
+
+**Server:**
+```bash
+cd server
+dotnet run
+```
+
+**Client:**
+```bash
+cd client
+npm install
+npm start
+```
+
+### Production
+ראה [DEPLOYMENT.md](DEPLOYMENT.md) להוראות deployment מלאות.
+
 ---
 
 ## 🗄️ הגדרת מסד הנתונים
