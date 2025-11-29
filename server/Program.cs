@@ -30,8 +30,8 @@ builder.Services.AddControllers()
 // Add database context
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("ToDoDB") ?? builder.Configuration["ToDoDB"],
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoDB") ?? builder.Configuration["ToDoDB"])
+        builder.Configuration.GetConnectionString("ToDoDB"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoDB"))
     )
 );
 

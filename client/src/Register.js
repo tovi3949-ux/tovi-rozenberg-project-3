@@ -40,12 +40,12 @@ function Register({ onRegisterSuccess, onSwitchToLogin }) {
 
   return (
     <div className="auth-container">
-      <h1 className="auth-title">Register</h1>
+      <h1 className="auth-title">📝 Register</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         <input
           type="text"
           className="auth-input"
-          placeholder="Username (min 3 characters)"
+          placeholder="👤 Username (min 3 characters)"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -55,7 +55,7 @@ function Register({ onRegisterSuccess, onSwitchToLogin }) {
         <input
           type="password"
           className="auth-input"
-          placeholder="Password (min 6 characters)"
+          placeholder="🔒 Password (min 6 characters)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -65,7 +65,7 @@ function Register({ onRegisterSuccess, onSwitchToLogin }) {
         <input
           type="password"
           className="auth-input"
-          placeholder="Confirm Password"
+          placeholder="🔒 Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
@@ -77,19 +77,16 @@ function Register({ onRegisterSuccess, onSwitchToLogin }) {
           className="auth-btn"
           disabled={loading}
         >
-          {loading ? 'Loading...' : 'Register'}
+          {loading ? '⏳ Creating account...' : 'Register'}
         </button>
       </form>
-      {error && <div className="auth-error">{error}</div>}
-      <p style={{ marginTop: '20px', textAlign: 'center' }}>
+      {error && <div className="auth-error">❌ {error}</div>}
+      <div className="auth-switch">
         Already have an account?{' '}
-        <span 
-          onClick={onSwitchToLogin}
-          style={{ color: '#1976d2', cursor: 'pointer', textDecoration: 'underline' }}
-        >
+        <button onClick={onSwitchToLogin}>
           Login here
-        </span>
-      </p>
+        </button>
+      </div>
     </div>
   );
 }

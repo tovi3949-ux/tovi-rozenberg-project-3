@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: todo_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  todoapi:
+    build: .
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__ToDoDB: "server=db;port=3306;database=todo_db;user=todo_user;password=todo_pass"
+      Jwt__Issuer: "your-issuer"
+      Jwt__Audience: "your-audience"
+      Jwt__Key: "a-very-long-secret-key"
+    ports:
+      - "5006:5006"
+    restart: unless-stopped
+
+volumes:
+  db-data:

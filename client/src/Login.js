@@ -32,12 +32,12 @@ function Login({ onLoginSuccess, onSwitchToRegister }) {
 
   return (
     <div className="auth-container">
-      <h1 className="auth-title">Login</h1>
+      <h1 className="auth-title">🔐 Login</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         <input
           type="text"
           className="auth-input"
-          placeholder="Username"
+          placeholder="👤 Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -46,7 +46,7 @@ function Login({ onLoginSuccess, onSwitchToRegister }) {
         <input
           type="password"
           className="auth-input"
-          placeholder="Password"
+          placeholder="🔒 Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -57,19 +57,16 @@ function Login({ onLoginSuccess, onSwitchToRegister }) {
           className="auth-btn"
           disabled={loading}
         >
-          {loading ? 'Loading...' : 'Login'}
+          {loading ? '⏳ Logging in...' : 'Login'}
         </button>
       </form>
-      {error && <div className="auth-error">{error}</div>}
-      <p style={{ marginTop: '20px', textAlign: 'center' }}>
+      {error && <div className="auth-error">❌ {error}</div>}
+      <div className="auth-switch">
         Don't have an account?{' '}
-        <span 
-          onClick={onSwitchToRegister}
-          style={{ color: '#1976d2', cursor: 'pointer', textDecoration: 'underline' }}
-        >
+        <button onClick={onSwitchToRegister}>
           Register here
-        </span>
-      </p>
+        </button>
+      </div>
     </div>
   );
 }

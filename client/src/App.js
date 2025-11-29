@@ -114,10 +114,9 @@ function App() {
   if (loading) {
     return (
       <section className="todoapp">
-        <header className="header">
-          <h1>todos</h1>
-        </header>
-        <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>
+        <div className="loading">
+          <div>⏳ Loading your tasks...</div>
+        </div>
       </section>
     );
   }
@@ -125,23 +124,15 @@ function App() {
   return (
     <section className="todoapp">
       <header className="header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-          <h1 style={{ margin: 0 }}>todos</h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '14px', color: '#666' }}>
-              Welcome, {service.getUsername()}!
+        <div className="header-top">
+          <h1>todos</h1>
+          <div className="user-info">
+            <span className="username">
+              👤 {service.getUsername()}
             </span>
             <button 
               onClick={handleLogout}
-              style={{ 
-                background: '#d32f2f', 
-                color: '#fff',
-                padding: '6px 12px',
-                borderRadius: '4px',
-                fontSize: '14px',
-                cursor: 'pointer',
-                border: 'none'
-              }}
+              className="logout-btn"
             >
               Logout
             </button>
@@ -151,31 +142,37 @@ function App() {
         <form onSubmit={createTodo}>
           <input 
             className="new-todo" 
-            placeholder="Well, let's take on the day" 
+            placeholder="What needs to be done today? ✨" 
             value={newTodo} 
             onChange={(e) => setNewTodo(e.target.value)} 
           />
         </form>
       </header>
-      <section className="main" style={{ display: "block" }}>
-        <ul className="todo-list">
-          {todos.map(todo => {
-            return (
-              <li className={todo.isComplete ? "completed" : ""} key={todo.id}>
-                <div className="view">
-                  <input 
-                    className="toggle" 
-                    type="checkbox" 
-                    checked={todo.isComplete} 
-                    onChange={(e) => updateCompleted(todo, e.target.checked)} 
-                  />
-                  <label>{todo.name}</label>
-                  <button className="destroy" onClick={() => deleteTodo(todo.id)}></button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+      <section className="main">
+        {todos.length === 0 ? (
+          <div className="empty-state">
+            No tasks yet! Add one above to get started.
+          </div>
+        ) : (
+          <ul className="todo-list">
+            {todos.map(todo => {
+              return (
+                <li className={todo.isComplete ? "completed" : ""} key={todo.id}>
+                  <div className="view">
+                    <input 
+                      className="toggle" 
+                      type="checkbox" 
+                      checked={todo.isComplete} 
+                      onChange={(e) => updateCompleted(todo, e.target.checked)} 
+                    />
+                    <label>{todo.name}</label>
+                    <button className="destroy" onClick={() => deleteTodo(todo.id)}></button>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
     </section>
   );

@@ -25,14 +25,34 @@ public partial class ToDoDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
             entity.ToTable("items");
-            entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.UserId).IsRequired(); // ⭐ הוספה
             
-            // ⭐ הגדרת Foreign Key
-            entity.HasOne(e => e.User)
-                  .WithMany()
-                  .HasForeignKey(e => e.UserId)
-                  .OnDelete(DeleteBehavior.Cascade);
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+                
+            entity.Property(e => e.IsComplete)
+                .HasDefaultValue(false);
+                
+            entity.Property(e => e.UserId)
+                .IsRequired();
+                
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .ValueGeneratedOnAddOrUpdate();
+            
+            // הגדרת Foreign Key
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Items)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_items_users");
+                
+            // Indexes
+            entity.HasIndex(e => e.UserId).HasDatabaseName("idx_userid");
+            entity.HasIndex(e => e.IsComplete).HasDatabaseName("idx_iscomplete");
         });
 
         // הגדרת Users
@@ -40,9 +60,22 @@ public partial class ToDoDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
             entity.ToTable("users");
-            entity.Property(e => e.Username).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.Password).HasMaxLength(255).IsRequired();
-            entity.HasIndex(e => e.Username).IsUnique();
+            
+            entity.Property(e => e.Username)
+                .HasMaxLength(100)
+                .IsRequired();
+                
+            entity.Property(e => e.Password)
+                .HasMaxLength(255)
+                .IsRequired();
+                
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            // Unique index על Username
+            entity.HasIndex(e => e.Username)
+                .IsUnique()
+                .HasDatabaseName("idx_username");
         });
 
         OnModelCreatingPartial(modelBuilder);
