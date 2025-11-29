@@ -1,62 +1,69 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApi;
-using TodoApi.DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Security.Claims;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// הגדרת URLs - תומך ב-development ו-production
+// קריאת פורט מ-Environment Variable (לRender)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5006";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen();
-
-// הגדרת JSON serialization עם camelCase
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-    options.SerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
-});
-
-// הוספת Controllers
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
-    });
 
 // Add database context
+var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("ToDoDB"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoDB"))
-    )
+        connectionString,
+        ServerVersion.Parse("8.0.44-mysql"))
 );
 
-const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+// הוספת תמיכה בקונטרולרים - חובה!
+builder.Services.AddControllers();
 
-// הוספת שירותי CORS
-builder.Services.AddCors(options =>
+// הוספת Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          // הוספת כתובות מותרות ספציפיות
-                          var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() 
-                              ?? new[] { "http://localhost:3000", "https://localhost:3000" };
-                          
-                          policy
-                              .WithOrigins(allowedOrigins)
-                              .AllowAnyHeader()
-                              .AllowAnyMethod()
-                              .AllowCredentials();
-                       });
+    c.SwaggerDoc("v1", new OpenApiInfo 
+    { 
+        Title = "TodoList API", 
+        Version = "v1",
+        Description = "API for managing todo items with user authentication"
+    });
+    
+    // הוספת JWT ל-Swagger
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
-// Add JWT authentication
+// Configure JWT
+var jwtKey = builder.Configuration["Jwt:Key"] ?? "SuperSecretKey12345678901234567890ABCDEFGH";
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "https://todolist-srever.onrender.com";
+var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "https://todolist-srever.onrender.com";
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,129 +77,61 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
     };
 });
 
 builder.Services.AddAuthorization();
 
+// Configure CORS
+var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() 
+    ?? new[] { "http://localhost:3000", "https://todolist-srever.onrender.com" };
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Configure middleware
+app.UseCors("AllowAll");
 
-app.UseCors(MyAllowSpecificOrigins);
+// הפעלת Swagger בכל הסביבות (כולל production)
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoList API v1");
+    c.RoutePrefix = "swagger"; // Swagger יהיה ב-/swagger
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-// מיפוי Controllers (עבור AuthController)
+// רישום הקונטרולרים - חובה!
 app.MapControllers();
 
-// ⭐ Helper function לשליפת UserId מה-Token ⭐
-int GetUserId(HttpContext context)
-{
-    // נסה למצוא את ה-UserId בכל האפשרויות
-    var userIdClaim = context.User.FindFirst(ClaimTypes.NameIdentifier) 
-                   ?? context.User.FindFirst("sub") 
-                   ?? context.User.FindFirst("nameid");
-    
-    if (userIdClaim == null)
-    {
-        // Debug: להדפיס את כל ה-Claims
-        var claims = string.Join(", ", context.User.Claims.Select(c => $"{c.Type}={c.Value}"));
-        Console.WriteLine($"Available claims: {claims}");
-        throw new UnauthorizedAccessException("User ID claim not found");
-    }
-    
-    if (!int.TryParse(userIdClaim.Value, out var userId))
-    {
-        throw new UnauthorizedAccessException($"Invalid user ID format: {userIdClaim.Value}");
-    }
-    
-    return userId;
-}
+// Health check endpoint
+app.MapGet("/", () => Results.Ok(new 
+{ 
+    status = "healthy", 
+    timestamp = DateTime.UtcNow,
+    message = "TodoList API is running. Visit /swagger for API documentation"
+}));
 
-// GET: שליפת משימות של המשתמש המחובר בלבד
-app.MapGet("/items", async (HttpContext context, ToDoDbContext db) =>
-{
-    var userId = GetUserId(context);
-    return await db.Items.Where(i => i.UserId == userId).ToListAsync();
-}).RequireAuthorization();
-
-// GET: שליפת משימה בודדת - רק אם שייכת למשתמש
-app.MapGet("/items/{id}", async (int id, HttpContext context, ToDoDbContext db) =>
-{
-    var userId = GetUserId(context);
-    var item = await db.Items.FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
-    
-    if (item is null)
-    {
-        return Results.NotFound();
-    }
-    
-    return Results.Ok(item);
-}).RequireAuthorization();
-
-// ⭐ POST: הוספת משימה חדשה - עם DTO ⭐
-app.MapPost("/items", async (CreateItemDto createDto, HttpContext context, ToDoDbContext db) =>
-{
-    var userId = GetUserId(context);
-    
-    var item = new Item
-    {
-        Name = createDto.Name,
-        IsComplete = createDto.IsComplete,
-        UserId = userId
-    };
-    
-    db.Items.Add(item);
-    await db.SaveChangesAsync();
-    return Results.Created($"/items/{item.Id}", item);
-}).RequireAuthorization();
-
-// ⭐ PUT: עדכון משימה - עם DTO ⭐
-app.MapPut("/items/{id}", async (int id, UpdateItemDto updateDto, HttpContext context, ToDoDbContext db) =>
-{
-    var userId = GetUserId(context);
-    var item = await db.Items.FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
-    
-    if (item is null)
-    {
-        return Results.NotFound();
-    }
-    
-    // עדכון שם רק אם הוא לא ריק
-    if (!string.IsNullOrEmpty(updateDto.Name))
-    {
-        item.Name = updateDto.Name;
-    }
-    
-    // עדכון סטטוס תמיד
-    item.IsComplete = updateDto.IsComplete;
-    
-    await db.SaveChangesAsync();
-    return Results.NoContent();
-}).RequireAuthorization();
-
-// DELETE: מחיקת משימה - רק אם שייכת למשתמש
-app.MapDelete("/items/{id}", async (int id, HttpContext context, ToDoDbContext db) =>
-{
-    var userId = GetUserId(context);
-    var item = await db.Items.FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
-    
-    if (item is null)
-    {
-        return Results.NotFound();
-    }
-    
-    db.Items.Remove(item);
-    await db.SaveChangesAsync();
-    return Results.NoContent();
-}).RequireAuthorization();
+app.MapGet("/health", () => Results.Ok(new 
+{ 
+    status = "healthy", 
+    timestamp = DateTime.UtcNow,
+    database = "connected" 
+}));
 
 app.Run();
