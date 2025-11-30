@@ -1,10 +1,10 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* חשוב מאוד לרוחב שדות הקלט */
+  box-sizing: border-box; 
 }
 
-/* --- סגנונות גלובליים --- */
+/* --- סגנונות גלובליים ו-TODO (שנשמרו) --- */
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -17,8 +17,7 @@ body {
   padding: 30px;
 }
 
-/* --- סגנונות אפליקציית ה-TODO (טורקיז/ירוק) --- */
-
+/* קונטיינר Todo */
 .todoapp {
   max-width: 560px;
   width: 100%;
@@ -28,6 +27,7 @@ body {
   box-shadow: 0 0 22px rgba(0, 255, 200, 0.15);
 }
 
+/* כותרת */
 .header h1 {
   text-align: center;
   font-size: 2.1rem;
@@ -37,6 +37,7 @@ body {
   text-shadow: 0 0 10px rgba(0, 255, 200, 0.6);
 }
 
+/* תיבת יצירת משימה */
 .new-todo {
   width: 100%;
   padding: 14px 16px;
@@ -52,11 +53,13 @@ body {
   color: #777;
 }
 
+/* רשימת המשימות */
 .todo-list {
   list-style: none;
   width: 100%;
 }
 
+/* פריט */
 .todo-list li {
   display: flex;
   align-items: center;
@@ -75,6 +78,7 @@ body {
   box-shadow: 0 0 16px rgba(0, 255, 200, 0.2);
 }
 
+/* checkbox */
 .toggle {
   width: 22px;
   height: 22px;
@@ -83,6 +87,7 @@ body {
   flex-shrink: 0;
 }
 
+/* טקסט משימה */
 .view label {
   flex: 1;
   font-size: 1.05rem;
@@ -91,6 +96,7 @@ body {
   word-break: break-word;
 }
 
+/* מצב משימה הושלמה */
 .todo-list li.completed {
   opacity: 0.55;
   border-left-color: #888;
@@ -101,6 +107,7 @@ body {
   color: #999;
 }
 
+/* כפתור מחיקה */
 .destroy {
   width: 30px;
   height: 30px;
@@ -128,11 +135,10 @@ body {
   font-size: 16px;
 }
 
-/* --- סגנונות טופס ה-LOGIN (טורקיז/סגול) --- */
+/* --- סגנונות טופס ה-LOGIN/REGISTER (מותאם למחלקות auth-*) --- */
 
-/* ה-body הגלובלי כבר מגדיר את הרקע והגופן הכלליים. */
-
-.login-container {
+/* קונטיינר ראשי */
+.auth-container {
   background-color: #1e1e1e;
   padding: 40px 50px;
   border-radius: 12px;
@@ -140,15 +146,16 @@ body {
   width: 350px;
 }
 
-.login-container h1 {
+/* כותרת */
+.auth-title {
   text-align: center;
   color: #0ff;
   margin-bottom: 25px;
   font-size: 2rem;
 }
 
-/* שדות הקלט */
-.login-container input {
+/* שדות קלט */
+.auth-input {
   width: 100%;
   padding: 12px 15px;
   margin-bottom: 20px;
@@ -159,16 +166,15 @@ body {
   font-size: 1rem;
   outline: none;
   transition: all 0.2s ease;
-  /* box-sizing: border-box; - כבר מוגדר גלובלית */
 }
 
-.login-container input:focus {
+.auth-input:focus {
   border-color: #f0f;
   box-shadow: 0 0 10px #f0f;
 }
 
-/* כפתור */
-.login-container button {
+/* כפתור (התחברות/רישום) */
+.auth-btn {
   width: 100%;
   padding: 12px;
   background-color: #0ff;
@@ -181,23 +187,90 @@ body {
   transition: all 0.2s ease;
 }
 
-.login-container button:hover {
+.auth-btn:hover {
   background-color: #f0f;
   color: #fff;
   box-shadow: 0 0 10px #f0f, 0 0 20px #0ff;
 }
 
-.login-container .register {
+/* הודעת שגיאה */
+.auth-error {
+  color: #ff0000;
+  text-align: center;
+  margin-top: 15px;
+  padding: 8px;
+  border: 1px solid #ff0000;
+  border-radius: 6px;
+  background-color: #2e1212;
+}
+
+/* אזור מעבר לרישום/כניסה */
+.auth-switch {
   text-align: center;
   margin-top: 15px;
   font-size: 0.9rem;
+  color: #a0a0a0;
 }
 
-.login-container .register a {
+.auth-switch button {
   color: #0ff;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
   text-decoration: underline;
+  transition: color 0.2s ease;
 }
 
-.login-container .register a:hover {
+.auth-switch button:hover {
   color: #f0f;
+}
+
+/* סגנונות משימות נוספים */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  color: #00ffc8;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid #00ffc8;
+  color: #00ffc8;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #00ffc8;
+  color: #121212;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  padding: 40px 0;
+  font-size: 1.1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #00ffc8;
 }
