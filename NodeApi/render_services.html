@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {  
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .service-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .service-type {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .service-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            color: #333;
+            font-size: 1em;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .status.live {
+            background: #10b981;
+            color: white;
+        }
+        .status.suspended {
+            background: #ef4444;
+            color: white;
+        }
+        .url {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .url:hover {
+            text-decoration: underline;
+        }
+        .json-display {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 20px;
+            display: none;
+        }
+        .json-display pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Render Services Dashboard</h1>
+        
+        <div class="controls">
+            <button class="btn" onclick="printPage()">🖨️ הדפס</button>
+            <button class="btn" onclick="toggleJSON()">📋 הצג JSON</button>
+            <button class="btn" onclick="copyJSON()">📄 העתק JSON</button>
+        </div>
+
+        <div id="services">
+            
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-name">NodeApi</div>
+                        <div class="service-type">web_service</div>
+                    </div>
+                    
+                    <div class="service-info">
+                        <div class="info-item">
+                            <div class="info-label">סטטוס</div>
+                            <div class="info-value">
+                                <span class="status live">
+                                    🟢 פעיל
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">URL</div>
+                            <div class="info-value">
+                                <a href="https://nodeapi-gebu.onrender.com" target="_blank" class="url">
+                                    https://nodeapi-gebu.onrender.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">סביבה</div>
+                            <div class="info-value">node</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">תאריך יצירה</div>
+                            <div class="info-value">30.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">עדכון אחרון</div>
+                            <div class="info-value">30.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Region</div>
+                            <div class="info-value">frankfurt</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-name">ToDoList-server</div>
+                        <div class="service-type">web_service</div>
+                    </div>
+                    
+                    <div class="service-info">
+                        <div class="info-item">
+                            <div class="info-label">סטטוס</div>
+                            <div class="info-value">
+                                <span class="status live">
+                                    🟢 פעיל
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">URL</div>
+                            <div class="info-value">
+                                <a href="https://todolist-server-i9n3.onrender.com" target="_blank" class="url">
+                                    https://todolist-server-i9n3.onrender.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">סביבה</div>
+                            <div class="info-value">docker</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">תאריך יצירה</div>
+                            <div class="info-value">29.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">עדכון אחרון</div>
+                            <div class="info-value">29.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Region</div>
+                            <div class="info-value">frankfurt</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-name">ToDoList</div>
+                        <div class="service-type">static_site</div>
+                    </div>
+                    
+                    <div class="service-info">
+                        <div class="info-item">
+                            <div class="info-label">סטטוס</div>
+                            <div class="info-value">
+                                <span class="status live">
+                                    🟢 פעיל
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">URL</div>
+                            <div class="info-value">
+                                <a href="https://todolist-mi35.onrender.com" target="_blank" class="url">
+                                    https://todolist-mi35.onrender.com
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">סביבה</div>
+                            <div class="info-value">N/A</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">תאריך יצירה</div>
+                            <div class="info-value">28.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">עדכון אחרון</div>
+                            <div class="info-value">30.11.2025</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Region</div>
+                            <div class="info-value">N/A</div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+
+        <div class="json-display" id="jsonDisplay">
+            <pre>[
+  {
+    "cursor": "NrzVdT2f2tE5ZXJ1aWJyczczODVucWEw",
+    "service": {
+      "autoDeploy": "yes",
+      "autoDeployTrigger": "commit",
+      "branch": "main",
+      "createdAt": "2025-11-29T23:41:48.223859Z",
+      "dashboardUrl": "https://dashboard.render.com/web/srv-d4lo9eruibrs7385nqa0",
+      "id": "srv-d4lo9eruibrs7385nqa0",
+      "name": "NodeApi",
+      "notifyOnFail": "default",
+      "ownerId": "tea-d4kp3andiees73bola4g",
+      "repo": "https://github.com/tovi3949-ux/tovi-rozenberg-project-3",
+      "rootDir": "NodeApi",
+      "serviceDetails": {
+        "buildPlan": "starter",
+        "cache": {
+          "profile": "no-cache"
+        },
+        "env": "node",
+        "envSpecificDetails": {
+          "buildCommand": "",
+          "startCommand": ""
+        },
+        "healthCheckPath": "",
+        "ipAllowList": [
+          {
+            "cidrBlock": "0.0.0.0/0",
+            "description": "everywhere"
+          }
+        ],
+        "maintenanceMode": {
+          "enabled": false,
+          "uri": ""
+        },
+        "numInstances": 1,
+        "openPorts": null,
+        "plan": "free",
+        "previews": {
+          "generation": "off"
+        },
+        "pullRequestPreviewsEnabled": "no",
+        "region": "frankfurt",
+        "runtime": "node",
+        "sshAddress": "srv-d4lo9eruibrs7385nqa0@ssh.frankfurt.render.com",
+        "url": "https://nodeapi-gebu.onrender.com"
+      },
+      "slug": "nodeapi-gebu",
+      "suspended": "not_suspended",
+      "suspenders": [],
+      "type": "web_service",
+      "updatedAt": "2025-11-30T00:02:06.069589Z"
+    }
+  },
+  {
+    "cursor": "lp8WtGtFlCxhMnUzanAxYzczOWVkZWEw",
+    "service": {
+      "autoDeploy": "yes",
+      "autoDeployTrigger": "commit",
+      "branch": "main",
+      "createdAt": "2025-11-29T19:10:03.857099Z",
+      "dashboardUrl": "https://dashboard.render.com/web/srv-d4lka2u3jp1c739edea0",
+      "id": "srv-d4lka2u3jp1c739edea0",
+      "name": "ToDoList-server",
+      "notifyOnFail": "default",
+      "ownerId": "tea-d4kp3andiees73bola4g",
+      "repo": "https://github.com/tovi3949-ux/tovi-rozenberg-project-3",
+      "rootDir": "server",
+      "serviceDetails": {
+        "buildPlan": "starter",
+        "cache": {
+          "profile": "no-cache"
+        },
+        "env": "docker",
+        "envSpecificDetails": {
+          "dockerCommand": "",
+          "dockerContext": ".",
+          "dockerfilePath": "Dockerfile"
+        },
+        "healthCheckPath": "",
+        "ipAllowList": [
+          {
+            "cidrBlock": "0.0.0.0/0",
+            "description": "everywhere"
+          }
+        ],
+        "maintenanceMode": {
+          "enabled": false,
+          "uri": ""
+        },
+        "numInstances": 1,
+        "openPorts": null,
+        "plan": "free",
+        "previews": {
+          "generation": "off"
+        },
+        "pullRequestPreviewsEnabled": "no",
+        "region": "frankfurt",
+        "runtime": "docker",
+        "sshAddress": "srv-d4lka2u3jp1c739edea0@ssh.frankfurt.render.com",
+        "url": "https://todolist-server-i9n3.onrender.com"
+      },
+      "slug": "todolist-server-i9n3",
+      "suspended": "not_suspended",
+      "suspenders": [],
+      "type": "web_service",
+      "updatedAt": "2025-11-29T19:14:10.341127Z"
+    }
+  },
+  {
+    "cursor": "n0DQcpxxR9Vhb2plNWR1czczZmQ2ZjRn",
+    "service": {
+      "autoDeploy": "yes",
+      "autoDeployTrigger": "commit",
+      "branch": "main",
+      "createdAt": "2025-11-28T13:36:34.986421Z",
+      "dashboardUrl": "https://dashboard.render.com/static/srv-d4kqaoje5dus73fd6f4g",
+      "environmentId": "evm-d4kq69fdiees73bpaqig",
+      "id": "srv-d4kqaoje5dus73fd6f4g",
+      "name": "ToDoList",
+      "notifyOnFail": "default",
+      "ownerId": "tea-d4kp3andiees73bola4g",
+      "repo": "https://github.com/tovi3949-ux/tovi-rozenberg-project-3",
+      "rootDir": "client",
+      "serviceDetails": {
+        "buildCommand": "npm run build",
+        "buildPlan": "starter",
+        "ipAllowList": [
+          {
+            "cidrBlock": "0.0.0.0/0",
+            "description": "everywhere"
+          }
+        ],
+        "previews": {
+          "generation": "off"
+        },
+        "publishPath": "build",
+        "pullRequestPreviewsEnabled": "no",
+        "url": "https://todolist-mi35.onrender.com"
+      },
+      "slug": "todolist-mi35",
+      "suspended": "not_suspended",
+      "suspenders": [],
+      "type": "static_site",
+      "updatedAt": "2025-11-29T23:40:30.02775Z"
+    }
+  }
+]</pre>
+        </div>
+    </div>
+
+    <script>
+        function printPage() {
+            window.print();
+        }
+
+        function toggleJSON() {
+            const jsonDisplay = document.getElementById('jsonDisplay');
+            if (jsonDisplay.style.display === 'none' || jsonDisplay.style.display === '') {
+                jsonDisplay.style.display = 'block';
+                jsonDisplay.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                jsonDisplay.style.display = 'none';
+            }
+        }
+
+        function copyJSON() {
+            const jsonText = "[\n  {\n    \"cursor\": \"NrzVdT2f2tE5ZXJ1aWJyczczODVucWEw\",\n    \"service\": {\n      \"autoDeploy\": \"yes\",\n      \"autoDeployTrigger\": \"commit\",\n      \"branch\": \"main\",\n      \"createdAt\": \"2025-11-29T23:41:48.223859Z\",\n      \"dashboardUrl\": \"https://dashboard.render.com/web/srv-d4lo9eruibrs7385nqa0\",\n      \"id\": \"srv-d4lo9eruibrs7385nqa0\",\n      \"name\": \"NodeApi\",\n      \"notifyOnFail\": \"default\",\n      \"ownerId\": \"tea-d4kp3andiees73bola4g\",\n      \"repo\": \"https://github.com/tovi3949-ux/tovi-rozenberg-project-3\",\n      \"rootDir\": \"NodeApi\",\n      \"serviceDetails\": {\n        \"buildPlan\": \"starter\",\n        \"cache\": {\n          \"profile\": \"no-cache\"\n        },\n        \"env\": \"node\",\n        \"envSpecificDetails\": {\n          \"buildCommand\": \"\",\n          \"startCommand\": \"\"\n        },\n        \"healthCheckPath\": \"\",\n        \"ipAllowList\": [\n          {\n            \"cidrBlock\": \"0.0.0.0/0\",\n            \"description\": \"everywhere\"\n          }\n        ],\n        \"maintenanceMode\": {\n          \"enabled\": false,\n          \"uri\": \"\"\n        },\n        \"numInstances\": 1,\n        \"openPorts\": null,\n        \"plan\": \"free\",\n        \"previews\": {\n          \"generation\": \"off\"\n        },\n        \"pullRequestPreviewsEnabled\": \"no\",\n        \"region\": \"frankfurt\",\n        \"runtime\": \"node\",\n        \"sshAddress\": \"srv-d4lo9eruibrs7385nqa0@ssh.frankfurt.render.com\",\n        \"url\": \"https://nodeapi-gebu.onrender.com\"\n      },\n      \"slug\": \"nodeapi-gebu\",\n      \"suspended\": \"not_suspended\",\n      \"suspenders\": [],\n      \"type\": \"web_service\",\n      \"updatedAt\": \"2025-11-30T00:02:06.069589Z\"\n    }\n  },\n  {\n    \"cursor\": \"lp8WtGtFlCxhMnUzanAxYzczOWVkZWEw\",\n    \"service\": {\n      \"autoDeploy\": \"yes\",\n      \"autoDeployTrigger\": \"commit\",\n      \"branch\": \"main\",\n      \"createdAt\": \"2025-11-29T19:10:03.857099Z\",\n      \"dashboardUrl\": \"https://dashboard.render.com/web/srv-d4lka2u3jp1c739edea0\",\n      \"id\": \"srv-d4lka2u3jp1c739edea0\",\n      \"name\": \"ToDoList-server\",\n      \"notifyOnFail\": \"default\",\n      \"ownerId\": \"tea-d4kp3andiees73bola4g\",\n      \"repo\": \"https://github.com/tovi3949-ux/tovi-rozenberg-project-3\",\n      \"rootDir\": \"server\",\n      \"serviceDetails\": {\n        \"buildPlan\": \"starter\",\n        \"cache\": {\n          \"profile\": \"no-cache\"\n        },\n        \"env\": \"docker\",\n        \"envSpecificDetails\": {\n          \"dockerCommand\": \"\",\n          \"dockerContext\": \".\",\n          \"dockerfilePath\": \"Dockerfile\"\n        },\n        \"healthCheckPath\": \"\",\n        \"ipAllowList\": [\n          {\n            \"cidrBlock\": \"0.0.0.0/0\",\n            \"description\": \"everywhere\"\n          }\n        ],\n        \"maintenanceMode\": {\n          \"enabled\": false,\n          \"uri\": \"\"\n        },\n        \"numInstances\": 1,\n        \"openPorts\": null,\n        \"plan\": \"free\",\n        \"previews\": {\n          \"generation\": \"off\"\n        },\n        \"pullRequestPreviewsEnabled\": \"no\",\n        \"region\": \"frankfurt\",\n        \"runtime\": \"docker\",\n        \"sshAddress\": \"srv-d4lka2u3jp1c739edea0@ssh.frankfurt.render.com\",\n        \"url\": \"https://todolist-server-i9n3.onrender.com\"\n      },\n      \"slug\": \"todolist-server-i9n3\",\n      \"suspended\": \"not_suspended\",\n      \"suspenders\": [],\n      \"type\": \"web_service\",\n      \"updatedAt\": \"2025-11-29T19:14:10.341127Z\"\n    }\n  },\n  {\n    \"cursor\": \"n0DQcpxxR9Vhb2plNWR1czczZmQ2ZjRn\",\n    \"service\": {\n      \"autoDeploy\": \"yes\",\n      \"autoDeployTrigger\": \"commit\",\n      \"branch\": \"main\",\n      \"createdAt\": \"2025-11-28T13:36:34.986421Z\",\n      \"dashboardUrl\": \"https://dashboard.render.com/static/srv-d4kqaoje5dus73fd6f4g\",\n      \"environmentId\": \"evm-d4kq69fdiees73bpaqig\",\n      \"id\": \"srv-d4kqaoje5dus73fd6f4g\",\n      \"name\": \"ToDoList\",\n      \"notifyOnFail\": \"default\",\n      \"ownerId\": \"tea-d4kp3andiees73bola4g\",\n      \"repo\": \"https://github.com/tovi3949-ux/tovi-rozenberg-project-3\",\n      \"rootDir\": \"client\",\n      \"serviceDetails\": {\n        \"buildCommand\": \"npm run build\",\n        \"buildPlan\": \"starter\",\n        \"ipAllowList\": [\n          {\n            \"cidrBlock\": \"0.0.0.0/0\",\n            \"description\": \"everywhere\"\n          }\n        ],\n        \"previews\": {\n          \"generation\": \"off\"\n        },\n        \"publishPath\": \"build\",\n        \"pullRequestPreviewsEnabled\": \"no\",\n        \"url\": \"https://todolist-mi35.onrender.com\"\n      },\n      \"slug\": \"todolist-mi35\",\n      \"suspended\": \"not_suspended\",\n      \"suspenders\": [],\n      \"type\": \"static_site\",\n      \"updatedAt\": \"2025-11-29T23:40:30.02775Z\"\n    }\n  }\n]";
+            navigator.clipboard.writeText(jsonText).then(() => {
+                alert('JSON הועתק ללוח!');
+            }).catch(err => {
+                console.error('Error copying:', err);
+            });
+        }
+    </script>
+</body>
+</html>
+    

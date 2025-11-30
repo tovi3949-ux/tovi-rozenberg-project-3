@@ -6,9 +6,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node get_project.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
 }
