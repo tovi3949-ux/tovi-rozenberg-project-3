@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>Render Services</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f6f6f6;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>רשימת השירותים מה-API</h1>
+  <div id="content">טוען נתונים...</div>
+
+  <script>
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        const wrap = document.getElementById("content");
+        wrap.innerHTML = "";
+
+        data.forEach(item => {
+          const service = item.service;
+          wrap.innerHTML += `
+            <div class="card">
+              <h2>${service.name}</h2>
+              <p><strong>ID:</strong> ${service.id}</p>
+              <p><strong>Type:</strong> ${service.type}</p>
+              <p><strong>URL:</strong> ${service.serviceDetails.url}</p>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById("content").innerText = "שגיאה בטעינת הנתונים";
+      });
+  </script>
+</body>
+</html>
