@@ -25,15 +25,15 @@ body {
   background-color: #2a2a2a; 
   padding: 40px 50px;
   border-radius: 12px;
-  /* צל הבלעדי החדש */
-  box-shadow: 0 0 20px rgba(255, 0, 104, 0.4);
+  /* צל בצבע החדש */
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
   width: 350px;
 }
 
 .auth-title {
   text-align: center;
-  /* צבע בלעדי */
-  color: #ff0068;
+  /* צבע ראשי */
+  color: #00FFFF;
   margin-bottom: 25px;
   font-size: 2rem;
 }
@@ -43,12 +43,12 @@ body {
   width: 100%;
   padding: 12px 15px;
   margin-bottom: 20px;
-  /* גבול בצבע בלעדי */
-  border: 2px solid #ff0068;
+  /* גבול בצבע ראשי */
+  border: 2px solid #00FFFF;
   border-radius: 8px;
   background-color: #1f1f1f;
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
+  /* צבע טקסט ראשי */
+  color: #00FFFF;
   font-size: 1rem;
   outline: none;
   transition: all 0.2s ease;
@@ -56,17 +56,17 @@ body {
 
 /* פוקוס שדה קלט */
 .auth-input:focus {
-  border-color: #ff0068;
-  /* צל פוקוס בצבע בלעדי */
-  box-shadow: 0 0 10px #ff0068;
+  border-color: #00FFFF;
+  /* צל פוקוס בצבע ראשי */
+  box-shadow: 0 0 10px #00FFFF;
 }
 
 /* כפתור (התחברות/רישום) */
 .auth-btn {
   width: 100%;
   padding: 12px;
-  /* צבע רקע בצבע בלעדי */
-  background-color: #ff0068;
+  /* צבע רקע ראשי */
+  background-color: #00FFFF;
   /* צבע טקסט כהה לקונטרסט */
   color: #1f1f1f; 
   border: none;
@@ -79,10 +79,10 @@ body {
 
 /* ריחוף כפתור */
 .auth-btn:hover {
-  background-color: #e0005a; /* גוון מעט כהה יותר */
+  background-color: #00CCCC; /* גוון מעט כהה יותר */
   color: #fff;
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 10px #ff0068, 0 0 20px #ff0068;
+  /* צל ריחוף בצבע ראשי */
+  box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
 }
 
 /* הודעת שגיאה */
@@ -105,8 +105,8 @@ body {
 }
 
 .auth-switch button {
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
+  /* צבע טקסט ראשי */
+  color: #00FFFF;
   background: none;
   border: none;
   padding: 0;
@@ -117,8 +117,8 @@ body {
 }
 
 .auth-switch button:hover {
-  /* צבע ריחוף בצבע בלעדי */
-  color: #e0005a;
+  /* גוון מעט כהה יותר */
+  color: #00CCCC;
 }
 
 /* --- סגנונות אפליקציית ה-TODO --- */
@@ -130,8 +130,8 @@ body {
   background: #2a2a2a; 
   border-radius: 14px;
   padding: 28px;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 22px rgba(255, 0, 104, 0.15);
+  /* צל בצבע ראשי */
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.15);
 }
 
 .header h1 {
@@ -139,10 +139,10 @@ body {
   font-size: 2.1rem;
   font-weight: 500;
   margin-bottom: 25px;
-  /* צבע בלעדי */
-  color: #ff0068;
-  /* צל בצבע בלעדי */
-  text-shadow: 0 0 10px rgba(255, 0, 104, 0.6);
+  /* צבע ראשי */
+  color: #00FFFF;
+  /* צל בצבע ראשי */
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
 }
 
 /* כפתור יציאה/פרטי משתמש */
@@ -160,17 +160,17 @@ body {
 }
 
 .username {
-  /* צבע בלעדי */
-  color: #ff0068;
+  /* צבע ראשי */
+  color: #00FFFF;
   font-weight: 500;
 }
 
 .logout-btn {
   background: none;
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068;
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
+  /* גבול בצבע ראשי */
+  border: 1px solid #00FFFF;
+  /* צבע טקסט בצבע ראשי */
+  color: #00FFFF;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -178,8 +178,8 @@ body {
 }
 
 .logout-btn:hover {
-  /* רקע בצבע בלעדי */
-  background: #ff0068;
+  /* רקע בצבע ראשי */
+  background: #00FFFF;
   color: #121212;
 }
 
@@ -189,13 +189,13 @@ body {
   width: 100%;
   padding: 14px 16px;
   border-radius: 10px;
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068;
+  /* גבול בצבע ראשי */
+  border: 1px solid #00FFFF;
   background: #1f1f1f;
   color: #fff;
   margin-bottom: 22px;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 5px rgba(255, 0, 104, 0.2);
+  /* צל בצבע ראשי */
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
 }
 
 .new-todo::placeholder {
@@ -218,17 +218,17 @@ body {
   padding: 16px 18px; 
   margin-bottom: 12px; 
   gap: 14px;
-  /* גבול בצבע בלעדי */
-  border-left: 4px solid #ff0068; 
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 14px rgba(255, 0, 104, 0.15); 
+  /* גבול בצבע ראשי */
+  border-left: 4px solid #00FFFF; 
+  /* צל בצבע ראשי */
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.15); 
   transition: 0.2s ease;
 }
 
 .todo-list li:hover {
   transform: translateY(-2px);
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 20px rgba(255, 0, 104, 0.3);
+  /* צל ריחוף בצבע ראשי */
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 /* checkbox */
@@ -236,8 +236,8 @@ body {
   width: 22px;
   height: 22px;
   cursor: pointer;
-  /* צבע בצבע בלעדי */
-  accent-color: #ff0068;
+  /* צבע ראשי */
+  accent-color: #00FFFF;
   flex-shrink: 0;
 }
 
@@ -263,37 +263,39 @@ body {
 
 /* כפתור מחיקה (התיקון למיקום ה-X) */
 .destroy {
-  width: 32px;
-  height: 32px;
+  /* גודל מעט יותר גדול */
+  width: 34px; 
+  height: 34px;
   border-radius: 50%;
   background: #444; 
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068; 
-  /* צבע X - אדום עדין בשביל קונטרסט למחיקה */
-  color: #ff5555; 
+  /* גבול בצבע ראשי */
+  border: 1px solid #00FFFF; 
+  /* צבע X בהיר לקונטרסט */
+  color: #e0e0e0; 
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   flex-shrink: 0;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 6px rgba(255, 0, 104, 0.4); 
+  /* צל בצבע ראשי */
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.4); 
   transition: 0.2s ease;
 }
 
 .destroy:hover {
-  /* רקע בצבע בלעדי */
-  background: #ff0068;
-  color: #121212;
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 14px rgba(255, 0, 104, 0.7);
+  /* רקע בצבע ראשי */
+  background: #00FFFF;
+  color: #121212; /* צבע כהה על רקע בהיר */
+  /* צל ריחוף בצבע ראשי */
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.7);
 }
 
 .destroy:after {
   content: '✕';
-  font-size: 18px; 
-  /* התיקון למיקום ה-X: הזזה עדינה כלפי מעלה */
-  transform: translateY(-1px); 
+  /* גופן X גדול יותר */
+  font-size: 20px; 
+  /* התיקון למיקום ה-X: הזזה חזקה יותר כלפי מעלה */
+  transform: translateY(-2px); 
 }
 
 /* מצבי הודעה */
@@ -309,6 +311,6 @@ body {
   text-align: center;
   padding: 50px;
   font-size: 1.2rem;
-  /* צבע בצבע בלעדי */
-  color: #ff0068;
+  /* צבע ראשי */
+  color: #00FFFF;
 }
