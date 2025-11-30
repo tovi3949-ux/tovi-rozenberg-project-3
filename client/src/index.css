@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 
-/* --- סגנונות גלובליים --- */
+/* --- הגדרות גלובליות --- */
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  /* שונה מ-#121212 (שחור) לאפור כהה */
+  /* רקע אפור כהה */
   background: #1f1f1f; 
   color: #e0e0e0;
   min-height: 100vh;
@@ -18,193 +18,22 @@ body {
   padding: 30px;
 }
 
-/* --- סגנונות אפליקציית ה-TODO (טורקיז/ירוק) --- */
+/* --- סגנונות טפסי LOGIN/REGISTER (auth-*) --- */
 
-/* קונטיינר Todo */
-.todoapp {
-  max-width: 560px;
-  width: 100%;
-  /* שונה ל-אפור כהה יותר */
-  background: #2a2a2a; 
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 0 22px rgba(0, 255, 200, 0.15);
-}
-
-/* כותרת */
-.header h1 {
-  text-align: center;
-  font-size: 2.1rem;
-  font-weight: 500;
-  margin-bottom: 25px;
-  color: #00ffc8;
-  text-shadow: 0 0 10px rgba(0, 255, 200, 0.6);
-}
-
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.username {
-  color: #00ffc8;
-  font-weight: 500;
-}
-
-.logout-btn {
-  background: none;
-  border: 1px solid #00ffc8;
-  color: #00ffc8;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.logout-btn:hover {
-  background: #00ffc8;
-  color: #121212;
-}
-
-
-/* תיבת יצירת משימה */
-.new-todo {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid #00ffc8;
-  background: #1f1f1f; /* הותאם לצבע הרקע הכללי */
-  color: #fff;
-  margin-bottom: 22px;
-  box-shadow: 0 0 5px rgba(0, 255, 200, 0.2);
-}
-
-.new-todo::placeholder {
-  color: #777;
-}
-
-/* רשימת המשימות */
-.todo-list {
-  list-style: none;
-  width: 100%;
-}
-
-/* פריט */
-.todo-list li {
-  display: flex;
-  align-items: center;
-  /* צבע רקע לפריט - כהה יותר מהקונטיינר */
-  background: #383838; 
-  border-radius: 10px;
-  padding: 16px 18px; /* הגדלת ריפוד */
-  margin-bottom: 12px; 
-  gap: 14px;
-  border-left: 4px solid #00ffc8; /* גבול עבה יותר */
-  box-shadow: 0 0 14px rgba(0, 255, 200, 0.15); /* צל מודגש יותר */
-  transition: 0.2s ease;
-}
-
-.todo-list li:hover {
-  transform: translateY(-2px); /* אפקט ריחוף עדין */
-  box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
-}
-
-/* checkbox */
-.toggle {
-  width: 22px;
-  height: 22px;
-  cursor: pointer;
-  accent-color: #00ffc8;
-  flex-shrink: 0;
-}
-
-/* טקסט משימה */
-.view label {
-  flex: 1;
-  font-size: 1.1rem; /* גופן מעט גדול יותר */
-  color: #e6e6e6;
-  padding: 2px 0;
-  word-break: break-word;
-}
-
-/* מצב משימה הושלמה */
-.todo-list li.completed {
-  opacity: 0.7;
-  border-left-color: #888;
-}
-
-.todo-list li.completed label {
-  text-decoration: line-through;
-  color: #999;
-}
-
-/* כפתור מחיקה */
-.destroy {
-  width: 32px; /* גודל מעט יותר גדול */
-  height: 32px;
-  border-radius: 50%;
-  background: #444; /* רקע כפתור כהה יותר */
-  border: 1px solid #00ffc8;
-  color: #00ffc8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  box-shadow: 0 0 6px rgba(0, 255, 200, 0.4);
-  transition: 0.2s ease;
-}
-
-.destroy:hover {
-  background: #00ffc8;
-  color: #000;
-  box-shadow: 0 0 14px rgba(0, 255, 200, 0.7);
-}
-
-.destroy:after {
-  content: '✕';
-  font-size: 18px; /* איקס גדול יותר */
-}
-
-.empty-state {
-  text-align: center;
-  color: #999;
-  padding: 40px 0;
-  font-size: 1.1rem;
-}
-
-.loading {
-  text-align: center;
-  padding: 50px;
-  font-size: 1.2rem;
-  color: #00ffc8;
-}
-
-
-/* --- סגנונות טופס ה-LOGIN/REGISTER (מותאם למחלקות auth-*) --- */
-
-/* קונטיינר ראשי */
 .auth-container {
-  /* שונה ל-אפור כהה יותר */
+  /* רקע קונטיינר אפור כהה יותר */
   background-color: #2a2a2a; 
   padding: 40px 50px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  /* צל הבלעדי החדש */
+  box-shadow: 0 0 20px rgba(255, 0, 104, 0.4);
   width: 350px;
 }
 
-/* כותרת */
 .auth-title {
   text-align: center;
-  color: #0ff;
+  /* צבע בלעדי */
+  color: #ff0068;
   margin-bottom: 25px;
   font-size: 2rem;
 }
@@ -214,28 +43,32 @@ body {
   width: 100%;
   padding: 12px 15px;
   margin-bottom: 20px;
-  border: 2px solid #0ff;
+  /* גבול בצבע בלעדי */
+  border: 2px solid #ff0068;
   border-radius: 8px;
-  /* הרקע הבהיר בשביל קונטרסט */
-  background-color: #1f1f1f; 
-  color: #0ff;
+  background-color: #1f1f1f;
+  /* צבע טקסט בצבע בלעדי */
+  color: #ff0068;
   font-size: 1rem;
   outline: none;
   transition: all 0.2s ease;
 }
 
-/* פוקוס - הוסר הוורוד/סגול */
+/* פוקוס שדה קלט */
 .auth-input:focus {
-  border-color: #00ffc8; 
-  box-shadow: 0 0 10px #00ffc8; 
+  border-color: #ff0068;
+  /* צל פוקוס בצבע בלעדי */
+  box-shadow: 0 0 10px #ff0068;
 }
 
 /* כפתור (התחברות/רישום) */
 .auth-btn {
   width: 100%;
   padding: 12px;
-  background-color: #0ff;
-  color: #1f1f1f; /* צבע טקסט כהה שיתאים לרקע החדש */
+  /* צבע רקע בצבע בלעדי */
+  background-color: #ff0068;
+  /* צבע טקסט כהה לקונטרסט */
+  color: #1f1f1f; 
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -244,11 +77,12 @@ body {
   transition: all 0.2s ease;
 }
 
-/* ריחוף כפתור - הוסר הוורוד/סגול */
+/* ריחוף כפתור */
 .auth-btn:hover {
-  background-color: #00ffc8;
-  color: #121212;
-  box-shadow: 0 0 10px #00ffc8, 0 0 20px #0ff;
+  background-color: #e0005a; /* גוון מעט כהה יותר */
+  color: #fff;
+  /* צל ריחוף בצבע בלעדי */
+  box-shadow: 0 0 10px #ff0068, 0 0 20px #ff0068;
 }
 
 /* הודעת שגיאה */
@@ -271,7 +105,8 @@ body {
 }
 
 .auth-switch button {
-  color: #0ff;
+  /* צבע טקסט בצבע בלעדי */
+  color: #ff0068;
   background: none;
   border: none;
   padding: 0;
@@ -282,5 +117,198 @@ body {
 }
 
 .auth-switch button:hover {
-  color: #00ffc8; 
+  /* צבע ריחוף בצבע בלעדי */
+  color: #e0005a;
+}
+
+/* --- סגנונות אפליקציית ה-TODO --- */
+
+.todoapp {
+  max-width: 560px;
+  width: 100%;
+  /* רקע קונטיינר אפור כהה יותר */
+  background: #2a2a2a; 
+  border-radius: 14px;
+  padding: 28px;
+  /* צל בצבע בלעדי */
+  box-shadow: 0 0 22px rgba(255, 0, 104, 0.15);
+}
+
+.header h1 {
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 500;
+  margin-bottom: 25px;
+  /* צבע בלעדי */
+  color: #ff0068;
+  /* צל בצבע בלעדי */
+  text-shadow: 0 0 10px rgba(255, 0, 104, 0.6);
+}
+
+/* כפתור יציאה/פרטי משתמש */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  /* צבע בלעדי */
+  color: #ff0068;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: none;
+  /* גבול בצבע בלעדי */
+  border: 1px solid #ff0068;
+  /* צבע טקסט בצבע בלעדי */
+  color: #ff0068;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+  /* רקע בצבע בלעדי */
+  background: #ff0068;
+  color: #121212;
+}
+
+
+/* תיבת יצירת משימה */
+.new-todo {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  /* גבול בצבע בלעדי */
+  border: 1px solid #ff0068;
+  background: #1f1f1f;
+  color: #fff;
+  margin-bottom: 22px;
+  /* צל בצבע בלעדי */
+  box-shadow: 0 0 5px rgba(255, 0, 104, 0.2);
+}
+
+.new-todo::placeholder {
+  color: #777;
+}
+
+/* רשימת המשימות */
+.todo-list {
+  list-style: none;
+  width: 100%;
+}
+
+/* פריט */
+.todo-list li {
+  display: flex;
+  align-items: center;
+  /* רקע פריט */
+  background: #383838; 
+  border-radius: 10px;
+  padding: 16px 18px; 
+  margin-bottom: 12px; 
+  gap: 14px;
+  /* גבול בצבע בלעדי */
+  border-left: 4px solid #ff0068; 
+  /* צל בצבע בלעדי */
+  box-shadow: 0 0 14px rgba(255, 0, 104, 0.15); 
+  transition: 0.2s ease;
+}
+
+.todo-list li:hover {
+  transform: translateY(-2px);
+  /* צל ריחוף בצבע בלעדי */
+  box-shadow: 0 0 20px rgba(255, 0, 104, 0.3);
+}
+
+/* checkbox */
+.toggle {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  /* צבע בצבע בלעדי */
+  accent-color: #ff0068;
+  flex-shrink: 0;
+}
+
+/* טקסט משימה */
+.view label {
+  flex: 1;
+  font-size: 1.1rem;
+  color: #e6e6e6;
+  padding: 2px 0;
+  word-break: break-word;
+}
+
+/* מצב משימה הושלמה */
+.todo-list li.completed {
+  opacity: 0.7;
+  border-left-color: #888;
+}
+
+.todo-list li.completed label {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* כפתור מחיקה (התיקון למיקום ה-X) */
+.destroy {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #444; 
+  /* גבול בצבע בלעדי */
+  border: 1px solid #ff0068; 
+  /* צבע X - אדום עדין בשביל קונטרסט למחיקה */
+  color: #ff5555; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* צל בצבע בלעדי */
+  box-shadow: 0 0 6px rgba(255, 0, 104, 0.4); 
+  transition: 0.2s ease;
+}
+
+.destroy:hover {
+  /* רקע בצבע בלעדי */
+  background: #ff0068;
+  color: #121212;
+  /* צל ריחוף בצבע בלעדי */
+  box-shadow: 0 0 14px rgba(255, 0, 104, 0.7);
+}
+
+.destroy:after {
+  content: '✕';
+  font-size: 18px; 
+  /* התיקון למיקום ה-X: הזזה עדינה כלפי מעלה */
+  transform: translateY(-1px); 
+}
+
+/* מצבי הודעה */
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  padding: 40px 0;
+  font-size: 1.1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  /* צבע בצבע בלעדי */
+  color: #ff0068;
 }
