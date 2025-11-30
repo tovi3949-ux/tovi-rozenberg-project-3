@@ -137,11 +137,12 @@ body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 12px;
   margin-bottom: 12px;
-  padding: 16px 18px;
+  padding: 18px 20px;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   animation: slideIn 0.3s ease;
+  min-height: 60px;
 }
 
 @keyframes slideIn {
@@ -178,11 +179,16 @@ body {
 }
 
 .toggle {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   accent-color: #667eea;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.toggle:hover {
+  transform: scale(1.15);
 }
 
 .view label {
@@ -191,6 +197,7 @@ body {
   color: #333;
   cursor: pointer;
   word-break: break-word;
+  padding: 4px 0;
 }
 
 .destroy {
@@ -198,9 +205,9 @@ body {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -208,16 +215,21 @@ body {
   transition: all 0.3s ease;
   flex-shrink: 0;
   margin: 0;
+  margin-right: 5px;
+  box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
 }
 
 .destroy:hover {
-  transform: rotate(90deg) scale(1.1);
-  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+  transform: rotate(90deg) scale(1.15);
+  box-shadow: 0 6px 16px rgba(245, 87, 108, 0.5);
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
 }
 
 .destroy:after {
   content: '✕';
   font-weight: bold;
+  font-size: 22px;
+  line-height: 1;
 }
 
 .auth-container {
