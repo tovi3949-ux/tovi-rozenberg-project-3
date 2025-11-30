@@ -204,7 +204,7 @@ body {
 /* כותרת */
 .auth-title {
   text-align: center;
-  color: #0ff;
+  color: #00ffc8;
   margin-bottom: 25px;
   font-size: 2rem;
 }
@@ -214,11 +214,11 @@ body {
   width: 100%;
   padding: 12px 15px;
   margin-bottom: 20px;
-  border: 2px solid #0ff;
+  border: 2px solid #00ffc8;
   border-radius: 8px;
   /* הרקע הבהיר בשביל קונטרסט */
   background-color: #1f1f1f; 
-  color: #0ff;
+  color: #00ffc8;
   font-size: 1rem;
   outline: none;
   transition: all 0.2s ease;
@@ -234,7 +234,7 @@ body {
 .auth-btn {
   width: 100%;
   padding: 12px;
-  background-color: #0ff;
+  background-color: #00ffc8;
   color: #1f1f1f;
   border: none;
   border-radius: 8px;
@@ -247,7 +247,7 @@ body {
 .auth-btn:hover {
   background-color: #00ffc8;
   color: #121212;
-  box-shadow: 0 0 10px #00ffc8, 0 0 20px #0ff;
+  box-shadow: 0 0 10px #00ffc8, 0 0 20px #00ffc8;
 }
 
 .auth-error {
@@ -268,7 +268,7 @@ body {
 }
 
 .auth-switch button {
-  color: #0ff;
+  color: #00ffc8;
   background: none;
   border: none;
   padding: 0;
