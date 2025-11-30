@@ -61,8 +61,8 @@ builder.Services.AddSwaggerGen(c =>
 
 // Configure JWT
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "SuperSecretKey12345678901234567890ABCDEFGH";
-var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "https://todolist-srever.onrender.com";
-var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "https://todolist-srever.onrender.com";
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "https://todolist-server-i9n3.onrender.com/";
+var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "https://todolist-server-i9n3.onrender.com/";
 
 builder.Services.AddAuthentication(options =>
 {
@@ -86,17 +86,13 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // Configure CORS
-var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() 
-    ?? new[] { "http://localhost:3000", "https://todolist-srever.onrender.com" };
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins(allowedOrigins)
+        policy.AllowAnyOrigin()  // מאפשר מכל מקור
               .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+              .AllowAnyHeader();
     });
 });
 
