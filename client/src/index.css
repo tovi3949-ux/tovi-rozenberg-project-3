@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 
-/* --- הגדרות גלובליות --- */
+/* --- סגנונות גלובליים --- */
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  /* רקע אפור כהה */
+  /* שונה מ-#121212 (שחור) לאפור כהה */
   background: #1f1f1f; 
   color: #e0e0e0;
   min-height: 100vh;
@@ -18,134 +18,29 @@ body {
   padding: 30px;
 }
 
-/* --- סגנונות טפסי LOGIN/REGISTER (auth-*) --- */
+/* --- סגנונות אפליקציית ה-TODO (טורקיז/ירוק) --- */
 
-.auth-container {
-  /* רקע קונטיינר אפור כהה יותר */
-  background-color: #2a2a2a; 
-  padding: 40px 50px;
-  border-radius: 12px;
-  /* צל הבלעדי החדש */
-  box-shadow: 0 0 20px rgba(255, 0, 104, 0.4);
-  width: 350px;
-}
-
-.auth-title {
-  text-align: center;
-  /* צבע בלעדי */
-  color: #ff0068;
-  margin-bottom: 25px;
-  font-size: 2rem;
-}
-
-/* שדות קלט */
-.auth-input {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  /* גבול בצבע בלעדי */
-  border: 2px solid #ff0068;
-  border-radius: 8px;
-  background-color: #1f1f1f;
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-/* פוקוס שדה קלט */
-.auth-input:focus {
-  border-color: #ff0068;
-  /* צל פוקוס בצבע בלעדי */
-  box-shadow: 0 0 10px #ff0068;
-}
-
-/* כפתור (התחברות/רישום) */
-.auth-btn {
-  width: 100%;
-  padding: 12px;
-  /* צבע רקע בצבע בלעדי */
-  background-color: #ff0068;
-  /* צבע טקסט כהה לקונטרסט */
-  color: #1f1f1f; 
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-/* ריחוף כפתור */
-.auth-btn:hover {
-  background-color: #e0005a; /* גוון מעט כהה יותר */
-  color: #fff;
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 10px #ff0068, 0 0 20px #ff0068;
-}
-
-/* הודעת שגיאה */
-.auth-error {
-  color: #ff5555;
-  text-align: center;
-  margin-top: 15px;
-  padding: 8px;
-  border: 1px solid #ff5555;
-  border-radius: 6px;
-  background-color: #382020;
-}
-
-/* אזור מעבר לרישום/כניסה */
-.auth-switch {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: #a0a0a0;
-}
-
-.auth-switch button {
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 0.9rem;
-  cursor: pointer;
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-.auth-switch button:hover {
-  /* צבע ריחוף בצבע בלעדי */
-  color: #e0005a;
-}
-
-/* --- סגנונות אפליקציית ה-TODO --- */
-
+/* קונטיינר Todo */
 .todoapp {
   max-width: 560px;
   width: 100%;
-  /* רקע קונטיינר אפור כהה יותר */
+  /* שונה ל-אפור כהה יותר */
   background: #2a2a2a; 
   border-radius: 14px;
   padding: 28px;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 22px rgba(255, 0, 104, 0.15);
+  box-shadow: 0 0 22px rgba(0, 255, 200, 0.15);
 }
 
+/* כותרת */
 .header h1 {
   text-align: center;
   font-size: 2.1rem;
   font-weight: 500;
   margin-bottom: 25px;
-  /* צבע בלעדי */
-  color: #ff0068;
-  /* צל בצבע בלעדי */
-  text-shadow: 0 0 10px rgba(255, 0, 104, 0.6);
+  color: #00ffc8;
+  text-shadow: 0 0 10px rgba(0, 255, 200, 0.6);
 }
 
-/* כפתור יציאה/פרטי משתמש */
 .header-top {
   display: flex;
   justify-content: space-between;
@@ -160,17 +55,14 @@ body {
 }
 
 .username {
-  /* צבע בלעדי */
-  color: #ff0068;
+  color: #00ffc8;
   font-weight: 500;
 }
 
 .logout-btn {
   background: none;
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068;
-  /* צבע טקסט בצבע בלעדי */
-  color: #ff0068;
+  border: 1px solid #00ffc8;
+  color: #00ffc8;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -178,8 +70,7 @@ body {
 }
 
 .logout-btn:hover {
-  /* רקע בצבע בלעדי */
-  background: #ff0068;
+  background: #00ffc8;
   color: #121212;
 }
 
@@ -189,13 +80,11 @@ body {
   width: 100%;
   padding: 14px 16px;
   border-radius: 10px;
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068;
-  background: #1f1f1f;
+  border: 1px solid #00ffc8;
+  background: #1f1f1f; /* הותאם לצבע הרקע הכללי */
   color: #fff;
   margin-bottom: 22px;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 5px rgba(255, 0, 104, 0.2);
+  box-shadow: 0 0 5px rgba(0, 255, 200, 0.2);
 }
 
 .new-todo::placeholder {
@@ -212,23 +101,20 @@ body {
 .todo-list li {
   display: flex;
   align-items: center;
-  /* רקע פריט */
+  /* צבע רקע לפריט - כהה יותר מהקונטיינר */
   background: #383838; 
   border-radius: 10px;
-  padding: 16px 18px; 
+  padding: 16px 18px; /* הגדלת ריפוד */
   margin-bottom: 12px; 
   gap: 14px;
-  /* גבול בצבע בלעדי */
-  border-left: 4px solid #ff0068; 
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 14px rgba(255, 0, 104, 0.15); 
+  border-left: 4px solid #00ffc8; /* גבול עבה יותר */
+  box-shadow: 0 0 14px rgba(0, 255, 200, 0.15); /* צל מודגש יותר */
   transition: 0.2s ease;
 }
 
 .todo-list li:hover {
-  transform: translateY(-2px);
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 20px rgba(255, 0, 104, 0.3);
+  transform: translateY(-2px); /* אפקט ריחוף עדין */
+  box-shadow: 0 0 20px rgba(0, 255, 200, 0.3);
 }
 
 /* checkbox */
@@ -236,15 +122,14 @@ body {
   width: 22px;
   height: 22px;
   cursor: pointer;
-  /* צבע בצבע בלעדי */
-  accent-color: #ff0068;
+  accent-color: #00ffc8;
   flex-shrink: 0;
 }
 
 /* טקסט משימה */
 .view label {
   flex: 1;
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* גופן מעט גדול יותר */
   color: #e6e6e6;
   padding: 2px 0;
   word-break: break-word;
@@ -261,42 +146,33 @@ body {
   color: #999;
 }
 
-/* כפתור מחיקה (התיקון למיקום ה-X) */
+/* כפתור מחיקה */
 .destroy {
-  width: 32px;
+  width: 32px; /* גודל מעט יותר גדול */
   height: 32px;
   border-radius: 50%;
-  background: #444; 
-  /* גבול בצבע בלעדי */
-  border: 1px solid #ff0068; 
-  /* צבע X - אדום עדין בשביל קונטרסט למחיקה */
-  color: #ff5555; 
+  background: #444; /* רקע כפתור כהה יותר */
+  border: 1px solid #00ffc8;
+  color: #00ffc8;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   flex-shrink: 0;
-  /* צל בצבע בלעדי */
-  box-shadow: 0 0 6px rgba(255, 0, 104, 0.4); 
+  box-shadow: 0 0 6px rgba(0, 255, 200, 0.4);
   transition: 0.2s ease;
 }
 
 .destroy:hover {
-  /* רקע בצבע בלעדי */
-  background: #ff0068;
-  color: #121212;
-  /* צל ריחוף בצבע בלעדי */
-  box-shadow: 0 0 14px rgba(255, 0, 104, 0.7);
+  background: #00ffc8;
+  color: #000;
+  box-shadow: 0 0 14px rgba(0, 255, 200, 0.7);
 }
 
 .destroy:after {
   content: '✕';
-  font-size: 18px; 
-  /* התיקון למיקום ה-X: הזזה עדינה כלפי מעלה */
-  transform: translateY(-1px); 
+  font-size: 18px; /* איקס גדול יותר */
 }
-
-/* מצבי הודעה */
 
 .empty-state {
   text-align: center;
@@ -309,6 +185,99 @@ body {
   text-align: center;
   padding: 50px;
   font-size: 1.2rem;
-  /* צבע בצבע בלעדי */
-  color: #ff0068;
+  color: #00ffc8;
+}
+
+
+/* --- סגנונות טופס ה-LOGIN/REGISTER (מותאם למחלקות auth-*) --- */
+
+/* קונטיינר ראשי */
+.auth-container {
+  /* שונה ל-אפור כהה יותר */
+  background-color: #2a2a2a; 
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  width: 350px;
+}
+
+/* כותרת */
+.auth-title {
+  text-align: center;
+  color: #0ff;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* שדות קלט */
+.auth-input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #0ff;
+  border-radius: 8px;
+  /* הרקע הבהיר בשביל קונטרסט */
+  background-color: #1f1f1f; 
+  color: #0ff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* פוקוס - הוסר הוורוד/סגול */
+.auth-input:focus {
+  border-color: #00ffc8; 
+  box-shadow: 0 0 10px #00ffc8; 
+}
+
+/* כפתור (התחברות/רישום) */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0ff;
+  color: #1f1f1f;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+  background-color: #00ffc8;
+  color: #121212;
+  box-shadow: 0 0 10px #00ffc8, 0 0 20px #0ff;
+}
+
+.auth-error {
+  color: #ff5555;
+  text-align: center;
+  margin-top: 15px;
+  padding: 8px;
+  border: 1px solid #ff5555;
+  border-radius: 6px;
+  background-color: #382020;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #a0a0a0;
+}
+
+.auth-switch button {
+  color: #0ff;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.auth-switch button:hover {
+  color: #00ffc8; 
 }
