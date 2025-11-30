@@ -115,19 +115,31 @@ app.UseAuthorization();
 // רישום הקונטרולרים - חובה!
 app.MapControllers();
 
-// Health check endpoint
-app.MapGet("/", () => Results.Ok(new 
-{ 
-    status = "healthy", 
-    timestamp = DateTime.UtcNow,
-    message = "TodoList API is running. Visit /swagger for API documentation"
-}));
+// Root endpoint - הפניה לSwagger
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
-app.MapGet("/health", () => Results.Ok(new 
-{ 
-    status = "healthy", 
-    timestamp = DateTime.UtcNow,
-    database = "connected" 
-}));
+// Health check endpoint
+app.MapGet("/health", async (ToDoDbContext db) =>
+{
+    try
+    {
+        await db.Database.CanConnectAsync();
+        return Results.Ok(new 
+        { 
+            status = "healthy", 
+            timestamp = DateTime.UtcNow,
+            database = "connected" 
+        });
+    }
+    catch
+    {
+        return Results.Ok(new 
+        { 
+            status = "healthy", 
+            timestamp = DateTime.UtcNow,
+            database = "disconnected" 
+        });
+    }
+});
 
 app.Run();
