@@ -261,16 +261,15 @@ body {
   color: #999;
 }
 
-/* כפתור מחיקה (התיקון למיקום ה-X) */
+/* כפתור מחיקה */
 .destroy {
-  /* גודל מעט יותר גדול */
-  width: 34px; 
-  height: 34px;
+  width: 38px; /* גודל מעט יותר גדול לכפתור */
+  height: 38px;
   border-radius: 50%;
   background: #444; 
   /* גבול בצבע ראשי */
   border: 1px solid #00FFFF; 
-  /* צבע X בהיר לקונטרסט */
+  /* צבע ה-X שיהיה בהיר לקונטרסט */
   color: #e0e0e0; 
   display: flex;
   justify-content: center;
@@ -280,6 +279,14 @@ body {
   /* צל בצבע ראשי */
   box-shadow: 0 0 6px rgba(0, 255, 255, 0.4); 
   transition: 0.2s ease;
+  padding: 0; /* וודא שאין ריפוד פנימי */
+}
+
+/* עיצוב ה-SVG בתוך כפתור המחיקה */
+.destroy svg {
+  width: 22px; /* גודל ספציפי לאייקון X */
+  height: 22px;
+  display: block; /* כדי להבטיח שלא יהיו רווחים מוזרים */
 }
 
 .destroy:hover {
@@ -290,13 +297,6 @@ body {
   box-shadow: 0 0 14px rgba(0, 255, 255, 0.7);
 }
 
-.destroy:after {
-  content: '✕';
-  /* גופן X גדול יותר */
-  font-size: 20px; 
-  /* התיקון למיקום ה-X: הזזה חזקה יותר כלפי מעלה */
-  transform: translateY(-2px); 
-}
 
 /* מצבי הודעה */
 

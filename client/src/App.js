@@ -43,7 +43,7 @@ function App() {
   async function createTodo(e) {
     e.preventDefault();
     if (!newTodo.trim()) return;
-    
+
     try {
       await service.addTask(newTodo);
       setNewTodo("");
@@ -130,7 +130,7 @@ function App() {
             <span className="username">
               👤 {service.getUsername()}
             </span>
-            <button 
+            <button
               onClick={handleLogout}
               className="logout-btn"
             >
@@ -140,11 +140,11 @@ function App() {
         </div>
         {error && <div className="auth-error">{error}</div>}
         <form onSubmit={createTodo}>
-          <input 
-            className="new-todo" 
-            placeholder="What needs to be done today? ✨" 
-            value={newTodo} 
-            onChange={(e) => setNewTodo(e.target.value)} 
+          <input
+            className="new-todo"
+            placeholder="What needs to be done today? ✨"
+            value={newTodo}
+            onChange={(e) => setNewTodo(e.target.value)}
           />
         </form>
       </header>
@@ -159,14 +159,19 @@ function App() {
               return (
                 <li className={todo.isComplete ? "completed" : ""} key={todo.id}>
                   <div className="view">
-                    <input 
-                      className="toggle" 
-                      type="checkbox" 
-                      checked={todo.isComplete} 
-                      onChange={(e) => updateCompleted(todo, e.target.checked)} 
+                    <input
+                      className="toggle"
+                      type="checkbox"
+                      checked={todo.isComplete}
+                      onChange={(e) => updateCompleted(todo, e.target.checked)}
                     />
                     <label>{todo.name}</label>
-                    <button className="destroy" onClick={() => deleteTodo(todo.id)}></button>
+                    <button className="destroy" onClick={() => deleteTodo(todo.id)}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
                   </div>
                 </li>
               );
