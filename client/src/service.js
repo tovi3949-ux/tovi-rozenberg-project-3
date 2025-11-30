@@ -62,12 +62,12 @@ export default {
 
   // Todo Services
   getTasks: async () => {
-    const result = await axios.get('/items');
+    const result = await axios.get('/api/items');
     return result.data;
   },
 
   addTask: async (name) => {
-    const result = await axios.post('/items', {
+    const result = await axios.post('/api/items', {
       name: name,
       isComplete: false
     });
@@ -75,8 +75,8 @@ export default {
   },
 
   setCompleted: async (id, isComplete) => {
-    const existingTask = await axios.get(`/items/${id}`);
-    const result = await axios.put(`/items/${id}`, {
+    const existingTask = await axios.get(`/api/items/${id}`);
+    const result = await axios.put(`/api/items/${id}`, {
       name: existingTask.data.name,
       isComplete: isComplete
     });
@@ -84,7 +84,7 @@ export default {
   },
 
   deleteTask: async (id) => {
-    const result = await axios.delete(`/items/${id}`);
+    const result = await axios.delete(`/api/items/${id}`);
     return result.data;
   }
 };
